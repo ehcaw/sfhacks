@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: whisper-api
+  name: whisper-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: whisper
+      app.kubernetes.io/name: whisper-api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: whisper
+        app.kubernetes.io/name: whisper-api
+    spec:
+      containers:
+      - image: skeenan947/whisper-api:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 600
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: whisper-api
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 120
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "4"
+            ephemeral-storage: 1Gi
+            memory: 24Gi
+            nvidia.com/gpu: "1"
+          requests:
+            cpu: "4"
+            ephemeral-storage: 1Gi
+            memory: 24Gi
+            # Request a GPU
+            nvidia.com/gpu: "1"
+      nodeSelector:
+        # ask for a GPU node with a Tesla T4 on it
+        cloud.google.com/gke-accelerator: nvidia-tesla-t4
+        cloud.google.com/gke-accelerator-count: "1"

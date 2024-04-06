@@ -1,23 +1,47 @@
-from fastapi import FastAPI, UploadFile, File
-from fastapi.responses import JSONResponse
-from .model import WhisperModel
+from flask import Flask, abort, request
+from flask_cors import CORS
+from tempfile import NamedTemporaryFile
+from model import WhisperModel
+import torch
 
-app = FastAPI()
+# Check if NVIDIA GPU is available
+torch.cuda.is_available()
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = WhisperModel()
+# Load the Whisper model:
+whisper = WhisperModel()
 
-@app.post("/transcribe")
-async def transcribe(audio: UploadFile = File(...)):
-    audio_file = await audio.read()
-    audio = model.load_audio(audio_file)
-    audio = model.pad_or_trim(audio)
+app = Flask(__name__)
+CORS(app)
 
-    mel = model.log_mel_spectrogram(audio).to(model.device)
+@app.route("/")
+def root_handler():
+    return "OK"
 
-    _, probs = model.detect_language(mel)
-    print(f"Detected language: {max(probs, key=probs.get)}")
+@app.route('/whisper', methods=['POST'])
+def whisper_handler():
+    if not request.files:
+        # If the user didn't submit any files, return a 400 (Bad Request) error.
+        abort(400)
 
-    options = model.DecodingOptions()
-    result = model.decode(model, mel, options)
+    # For each file, let's store the results in a list of dictionaries.
+    results = []
 
-    return JSONResponse(content={'transcription': result.text})
+    # Loop over every file that the user submitted.
+    for filename, handle in request.files.items():
+        # Create a temporary file.
+        # The location of the temporary file is available in `temp.name`.
+        temp = NamedTemporaryFile()
+        # Write the user's uploaded file to the temporary file.
+        # The file will get deleted when it drops out of scope.
+        handle.save(temp)
+        # Let's get the transcript of the temporary file.
+        result = model.transcribe(temp.name)
+        # Now we can store the result object for this file.
+        results.append({
+            'filename': filename,
+            'transcript': result['text'],
+        })
+
+    # This will be automatically converted to JSON.
+    return {'results': results}
