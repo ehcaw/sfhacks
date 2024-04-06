@@ -1,16 +1,13 @@
 import { cn } from "../utils/cn";
 import React from "react";
+
 import {
-  IconArrowWaveRightUp,
-  IconBoxAlignRightFilled,
-  IconBoxAlignTopLeft,
   IconClipboardCopy,
   IconFileBroken,
   IconSignature,
-  IconTableColumn,
 } from "@tabler/icons-react";
 
-export const BentoGrid = ({
+const BentoGrid = ({
   className,
   children,
 }: {
@@ -29,7 +26,7 @@ export const BentoGrid = ({
   );
 };
 
-export const BentoGridItem = ({
+const BentoGridItem = ({
   className,
   title,
   description,
@@ -45,7 +42,7 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black dark:border-white/[0.2] bg-white border border-transparent justify-between flex flex-col space-y-4",
+        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-2 dark:bg-black dark:border-white/[0.2] bg-white border border-transparent justify-between flex flex-col space-y-3",
         className
       )}
     >
@@ -62,6 +59,7 @@ export const BentoGridItem = ({
     </div>
   );
 };
+
 const Skeleton = () => (
   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></div>
 );
@@ -71,16 +69,19 @@ const items = [
     title: "lists",
     description: "the fundamental data structure",
     header: <Skeleton />,
+    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
   },
   {
     title: "hashmaps",
     description: "programmer's dictionary",
     header: <Skeleton />,
+    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
   },
   {
     title: "linked list",
     description: "use-case dependent list",
     header: <Skeleton />,
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
 ];
 
@@ -98,12 +99,13 @@ export function Homebento() {
         return (
           <BentoGridItem
             key={i}
-            title={item.title} // remove later
-            description={item.description} // remove later
-            header={item.header}
+            title={item.title} // Provide the title for the item
+            description={item.description} // Provide the description for the item
+            header={item.header} // Provide the header component for the item
+            icon={item.icon} // Provide the icon component for the item
             className={`${
               i === 0 ? "lg:col-span-3 " : `opacity-50 ${colSpan} ${rowSpan}`
-            }`} // enlarges only the first box, makes all other boxes grayed out
+            }`} // Set the className for styling purposes
           />
         );
       })}
