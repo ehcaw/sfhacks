@@ -190,7 +190,7 @@ const SkeletonFour = () => {
         className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
       >
         <Image
-          src="/img/n2.webp"
+          src="/n2.webp"
           alt="avatar"
           height="100"
           width="100"
@@ -207,14 +207,14 @@ const SkeletonFour = () => {
         <Image
           src="/n2.webp"
           alt="avatar"
-          height="100"
-          width="100"
+          height="800"
+          width="800"
           className=" h-30 w-30"
         />
         <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
           merge sort, quick sort, heap sort
         </p>
-        <p className="border border-orange-500 bg-orange-100 dark:bg-green-900/20 text-orange-600 text-xs rounded-full px-2 py-0.5 mt-4">
+        <p className="border border-orange-500 bg-orange-100 dark:bg-orange-900/20 text-orange-600 text-xs rounded-full px-2 py-0.5 mt-4">
           nlogn algorithms
         </p>
       </motion.div>
@@ -232,7 +232,7 @@ const SkeletonFour = () => {
         <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
           bucket sort, counting sort
         </p>
-        <p className="border border-green-500 bg-green-100 dark:bg-orange-900/20 text-green-600 text-xs rounded-full px-2 py-0.5 mt-4">
+        <p className="border border-green-500 bg-green-100 dark:bg-green-900/20 text-green-600 text-xs rounded-full px-2 py-0.5 mt-4">
           "linear" algorithms
         </p>
       </motion.div>
@@ -271,7 +271,197 @@ const SkeletonFive = () => {
       whileHover="animate"
       className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
     >
+      <Image
+        src="/graphs.avif"
+        alt="graphs"
+        height="800"
+        width="800"
+        className=" h-100 w-100"
+      ></Image>
       <motion.div
+        variants={variants}
+        className="border border-blue-500 bg-blue-100 flex flex-row rounded-2xl border border-neutral-100 dark:border-white/[0.2] p-2 items-center justify-center bg-white dark:bg-black"
+      >
+        <p className="text-xs text-neutral-500 text-center text-blue-600">
+          undirected, directed, connected
+        </p>
+      </motion.div>
+    </motion.div>
+  );
+};
+const SkeletonSix = () => {
+  const variants = {
+    initial: {
+      x: 0,
+      rotate: 0,
+    },
+    hover: {
+      x: 20,
+      rotate: -5,
+    },
+  };
+  const variantsSecond = {
+    initial: {
+      x: 0,
+      rotate: 0,
+    },
+    hover: {
+      x: 20,
+      rotate: 5,
+    },
+  };
+  return (
+    <motion.div
+      initial="initial"
+      animate="animate"
+      whileHover="hover"
+      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-row space-x-2"
+    >
+      <motion.div
+        variants={variants}
+        className="h-full w-1/2 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+      >
+        <Image
+          src="/n2.webp"
+          alt="avatar"
+          height="100"
+          width="100"
+          className="h-10 w-10"
+        />
+        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
+          linear search
+        </p>
+        <p className="border border-red-500 bg-red-100 dark:bg-red-900/20 text-red-600 text-xs rounded-full px-2 py-0.5 mt-4">
+          linear time
+        </p>
+      </motion.div>
+      <motion.div
+        variants={variantsSecond}
+        className="h-full w-1/2 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+      >
+        <Image
+          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
+          alt="avatar"
+          height="100"
+          width="100"
+          className="rounded-full h-10 w-10"
+        />
+        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
+          binary search
+        </p>
+        <p className="border border-green-500 bg-green-100 dark:bg-green-900/20 text-green-600 text-xs rounded-full px-2 py-0.5 mt-4">
+          logn time
+        </p>
+      </motion.div>
+    </motion.div>
+  );
+};
+const items = [
+  {
+    title: "array",
+    description: (
+      <span className="text-sm">
+        contiguous memory storage for elements, usually of the same type
+      </span>
+    ),
+    header: <SkeletonOne />,
+    className: "md:col-span-1",
+    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "linked list",
+    description: (
+      <span className="text-sm">
+        series of connected nodes, each containing data
+      </span>
+    ),
+    header: <SkeletonTwo />,
+    className: "md:col-span-1",
+    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "tree",
+    description: (
+      <span className="text-sm">
+        hierarchical data structure with a root and branches
+      </span>
+    ),
+    header: <SkeletonThree />,
+    className: "md:col-span-1",
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "sorting algorithms",
+    description: (
+      <span className="text-sm">
+        techniques to get a collection of elements in order
+      </span>
+    ),
+    header: <SkeletonFour />,
+    className: "md:col-span-2",
+    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+  },
+
+  {
+    title: "graph",
+    description: (
+      <span className="text-sm">collection of nodes connected by edges</span>
+    ),
+    header: <SkeletonFive />,
+    className: "md:col-span-1",
+    icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "stack",
+    description: (
+      <span className="text-sm">last in, first out data structure</span>
+    ),
+    header: <SkeletonThree />,
+    className: "md:col-span-1",
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "queue",
+    description: (
+      <span className="text-sm">first in, first out data structure</span>
+    ),
+    header: <SkeletonThree />,
+    className: "md:col-span-1",
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "hash table",
+    description: (
+      <span className="text-sm">data structure that maps keys to values</span>
+    ),
+    header: <SkeletonThree />,
+    className: "md:col-span-1",
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "heap",
+    description: (
+      <span className="text-sm">
+        binary tree with a specific ordering property
+      </span>
+    ),
+    header: <SkeletonThree />,
+    className: "md:col-span-1",
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "searching algorithms",
+    description: (
+      <span className="text-sm">finding elements in a list efficiently</span>
+    ),
+    header: <SkeletonSix />,
+    className: "md:col-span-1",
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+];
+
+/* all boiler plate code given
+<motion.div
         variants={variants}
         className="flex flex-row rounded-2xl border border-neutral-100 dark:border-white/[0.2] p-2  items-start space-x-2 bg-white dark:bg-black"
       >
@@ -294,60 +484,5 @@ const SkeletonFive = () => {
         <p className="text-xs text-neutral-500">Use PHP.</p>
         <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
       </motion.div>
-    </motion.div>
-  );
-};
-const items = [
-  {
-    title: "Array",
-    description: (
-      <span className="text-sm">
-        Contiguous memory storage for elements, usually of the same type
-      </span>
-    ),
-    header: <SkeletonOne />,
-    className: "md:col-span-1",
-    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: "Linked List",
-    description: (
-      <span className="text-sm">
-        Series of connected nodes, each containing data
-      </span>
-    ),
-    header: <SkeletonTwo />,
-    className: "md:col-span-1",
-    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: "Stack",
-    description: (
-      <span className="text-sm">Last in, first out data structure</span>
-    ),
-    header: <SkeletonThree />,
-    className: "md:col-span-1",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: "sorting algorithms",
-    description: (
-      <span className="text-sm">
-        techniques to get a collection of elements in order
-      </span>
-    ),
-    header: <SkeletonFour />,
-    className: "md:col-span-2",
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
-  },
 
-  {
-    title: "Graph",
-    description: (
-      <span className="text-sm">Collection of nodes connected by edges</span>
-    ),
-    header: <SkeletonFive />,
-    className: "md:col-span-1",
-    icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
-  },
-];
+*/
