@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 //import activeAssistantIcon from "@/img/active.gif";
 //import notActiveAssistantIcon from "@/img/active.png";
 import { useFormStatus } from "react-dom";
+import React from "react";
 
 const mimeType = "audio/webm";
 

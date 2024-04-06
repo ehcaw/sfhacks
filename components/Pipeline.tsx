@@ -1,11 +1,11 @@
 "use client";
 
-import transcript from "../../actions/transcript";
+import transcript from "../actions/transcript";
 import { useFormState } from "react-dom";
 import { useEffect, useRef, useState } from "react";
-import Recorder from "../../components/Recorder";
-import VoiceSynthesizer from "../../components/VoiceSynthesizer";
-import Messages from "../../components/Messages";
+import Recorder from "./Recorder";
+import VoiceSynthesizer from "./VoiceSynthesizer";
+import Messages from "./Messages";
 import { SettingsIcon } from "lucide-react";
 import Image from "next/image";
 

@@ -1,7 +1,8 @@
-import { Message } from "../src/page";
+
+import { Message } from "./Pipeline";
 import SubmitButton from "./SubmitButton";
 import { ChevronDownCircle } from "lucide-react";
-
+import React from "react";
 interface Props {
   messages: Message[];
 }
