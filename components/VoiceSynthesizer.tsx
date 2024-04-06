@@ -1,3 +1,13 @@
+/**
+ * VoiceSynthesizer component is used to generate speech from text using the Web Speech API.
+ * It provides settings for voice, pitch, rate, and volume.
+ * 
+ * Note: Consider migrating to Google Cloud Text-to-Speech API for more advanced features and better performance in the future.
+ * 
+ * @param state - The state object containing the sender and response text.
+ * @param displaySettings - A boolean value indicating whether to display the voice settings.
+ */
+
 "use client";
 
 import React from "react";
