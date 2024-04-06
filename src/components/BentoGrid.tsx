@@ -7,7 +7,7 @@ import {
   IconSignature,
 } from "@tabler/icons-react";
 
-const BentoGrid = ({
+export const BentoGrid = ({
   className,
   children,
 }: {
@@ -26,7 +26,7 @@ const BentoGrid = ({
   );
 };
 
-const BentoGridItem = ({
+export const BentoGridItem = ({
   className,
   title,
   description,
@@ -66,20 +66,62 @@ const Skeleton = () => (
 
 const items = [
   {
-    title: "lists",
-    description: "the fundamental data structure",
+    title: "Array",
+    description: "Contiguous memory storage for elements of the same type.",
     header: <Skeleton />,
-    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "hashmaps",
-    description: "programmer's dictionary",
+    title: "Linked List",
+    description: "Series of connected nodes, each containing data.",
     header: <Skeleton />,
-    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "linked list",
-    description: "use-case dependent list",
+    title: "Stack",
+    description: "Last in, first out (LIFO) data structure.",
+    header: <Skeleton />,
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Queue",
+    description: "First in, first out (FIFO) data structure.",
+    header: <Skeleton />,
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Tree",
+    description: "Hierarchical data structure with a root and branches.",
+    header: <Skeleton />,
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Graph",
+    description: "Collection of nodes connected by edges.",
+    header: <Skeleton />,
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Hash Table",
+    description: "Data structure that maps keys to values.",
+    header: <Skeleton />,
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Heap",
+    description: "Binary tree with a specific ordering property.",
+    header: <Skeleton />,
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Sorting Algorithms",
+    description: "Techniques to rearrange elements in order.",
+    header: <Skeleton />,
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Searching Algorithms",
+    description: "Techniques to find specific elements efficiently.",
     header: <Skeleton />,
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
