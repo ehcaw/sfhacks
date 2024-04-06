@@ -1,6 +1,5 @@
 import { cn } from "../utils/cn";
-import React from "react";
-import Pipeline from "../components/page/Pipeline";
+import React, { ReactNode } from "react";
 
 import {
   IconClipboardCopy,
@@ -33,14 +32,12 @@ export const BentoGridItem = ({
   description,
   header,
   icon,
-  onClick,
 }: {
   className?: string;
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
   header?: React.ReactNode;
   icon?: React.ReactNode;
-  onClick?: () => void;
 }) => {
   return (
     <div
@@ -143,7 +140,6 @@ export function Homebento() {
         const rowSpan = i % 3 === 0 ? "sm:row-span-2" : "sm:row-span-1"; // variable box sizing
         return (
           <BentoGridItem
-            onClick= {() => console.log("clicked")}
             key={i}
             title={item.title} // Provide the title for the item
             description={item.description} // Provide the description for the item

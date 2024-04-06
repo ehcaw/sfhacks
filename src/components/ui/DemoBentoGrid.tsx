@@ -1,7 +1,6 @@
 "use client";
 import { cn } from "@/utils/cn";
-import React from "react";
-import { BentoGrid, BentoGridItem } from "../BentoGrid";
+import React, { useState } from "react";
 import {
   IconBoxAlignRightFilled,
   IconClipboardCopy,
@@ -11,19 +10,31 @@ import {
 } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import ModulePopup from "../ModulePopup";
 
 export function BentoGridThirdDemo() {
+  const [popup, setPopup] = useState<boolean>(false);
+  const handleClick = (title: string) => {
+    setPopup(!popup);
+  };
   return (
     <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
       {items.map((item, i) => (
-        <BentoGridItem
+        <div
+          onClick={() => handleClick(item.title)}
           key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
           className={cn("[&>p:text-lg]", item.className)}
-          icon={item.icon}
-        />
+        >
+          <BentoGridItem
+            key={i}
+            title={item.title}
+            description={item.description}
+            header={item.header}
+            className={cn("[&>p:text-lg]", item.className)}
+            icon={item.icon}
+          />
+          {popup && <ModulePopup title={item.title}></ModulePopup>}
+        </div>
       ))}
     </BentoGrid>
   );
@@ -116,7 +127,7 @@ const SkeletonTwo = () => {
     >
       {arr.map((_, i) => (
         <motion.div
-          key={"skelenton-two" + i}
+          key={"skeleton-two" + i}
           variants={variants}
           style={{
             maxWidth: Math.random() * (100 - 40) + 40 + "%",
@@ -319,7 +330,7 @@ const SkeletonSix = () => {
     >
       <motion.div
         variants={variants}
-        className="h-full w-1/2 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+        className="h-full relative z-20 w-1/2 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
       >
         <Image
           src="/n2.webp"
@@ -337,7 +348,7 @@ const SkeletonSix = () => {
       </motion.div>
       <motion.div
         variants={variantsSecond}
-        className="h-full w-1/2 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+        className="h-full relative z-20 w-1/2 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
       >
         <Image
           src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
@@ -369,6 +380,26 @@ const items = [
     icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
   },
   {
+    title: "searching algorithms",
+    description: (
+      <span className="text-sm">finding elements in a list efficiently</span>
+    ),
+    header: <SkeletonSix />,
+    className: "md:col-span-2",
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "sorting algorithms",
+    description: (
+      <span className="text-sm">
+        techniques to get a collection of elements in order
+      </span>
+    ),
+    header: <SkeletonFour />,
+    className: "md:col-span-2",
+    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+  },
+  {
     title: "linked list",
     description: (
       <span className="text-sm">
@@ -390,18 +421,6 @@ const items = [
     className: "md:col-span-1",
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
-  {
-    title: "sorting algorithms",
-    description: (
-      <span className="text-sm">
-        techniques to get a collection of elements in order
-      </span>
-    ),
-    header: <SkeletonFour />,
-    className: "md:col-span-2",
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
-  },
-
   {
     title: "graph",
     description: (
@@ -449,16 +468,60 @@ const items = [
     className: "md:col-span-1",
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
-  {
-    title: "searching algorithms",
-    description: (
-      <span className="text-sm">finding elements in a list efficiently</span>
-    ),
-    header: <SkeletonSix />,
-    className: "md:col-span-1",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
-  },
 ];
+
+export const BentoGrid = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children?: React.ReactNode;
+}) => {
+  return (
+    <div
+      className={cn(
+        "grid md:auto-rows-[18rem] grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto ",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const BentoGridItem = ({
+  className,
+  title,
+  description,
+  header,
+  icon,
+}: {
+  className?: string;
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
+  header?: React.ReactNode;
+  icon?: React.ReactNode;
+}) => {
+  return (
+    <div
+      className={cn(
+        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-2 dark:bg-black dark:border-white/[0.2] bg-white border border-transparent justify-between flex flex-col space-y-3",
+        className
+      )}
+    >
+      {header}
+      <div className="group-hover/bento:translate-x-2 transition duration-200">
+        {icon}
+        <div className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2">
+          {title}
+        </div>
+        <div className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300">
+          {description}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 /* all boiler plate code given
 <motion.div
