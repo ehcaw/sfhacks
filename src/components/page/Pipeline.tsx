@@ -1,6 +1,6 @@
 "use client";
 
-import transcript from "../actions/transcript";
+import transcript from "../../../actions/transcript";
 import { useFormState } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import Recorder from "./Recorder";

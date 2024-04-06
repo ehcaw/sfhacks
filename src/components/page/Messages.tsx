@@ -1,6 +1,6 @@
 
 import { Message } from "./Pipeline";
-import SubmitButton from "./SubmitButton";
+import SubmitButton from "../../../components/SubmitButton";
 import { ChevronDownCircle } from "lucide-react";
 import React from "react";
 interface Props {
