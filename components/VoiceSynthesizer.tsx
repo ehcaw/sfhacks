@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { ChangeEvent, useEffect, useState } from "react";
 
 type State = {

@@ -1,4 +1,4 @@
-import { Message } from "@/app/page";
+import { Message } from "../src/page";
 import SubmitButton from "./SubmitButton";
 import { ChevronDownCircle } from "lucide-react";
 
