@@ -8,7 +8,7 @@ type ChatboxProps = {
   messages: MessageType[];
 };
 
-export const ChatBox = ({ messages }: ChatboxProps) => {
+export const Chatbox = ({ messages }: ChatboxProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {

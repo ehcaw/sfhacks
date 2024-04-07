@@ -14,7 +14,7 @@ export const Message = ({ message }: MessageProps) => {
         <div className="chat chat-end containerWrap">
           <div className="chat-image avatar">
             <div className="w-10 rounded-full">
-              <img src="images/coloredpolyglot.png" alt="Colored Polyglot" />
+              <img src="/coloredpolyglot.png" alt="Colored Polyglot" />
             </div>
           </div>
           <div className="chat-header">{message.senderId}</div>
@@ -28,7 +28,7 @@ export const Message = ({ message }: MessageProps) => {
         <div className="chat chat-start containerWrap">
           <div className="chat-image avatar">
             <div className="w-10 rounded-full">
-              <img src="images/coloredpolyglot.png" alt="Colored Polyglot" />
+              <img src="/coloredpolyglot.png" alt="Colored Polyglot" />
             </div>
           </div>
           <div className="chat-header">{message.senderId}</div>

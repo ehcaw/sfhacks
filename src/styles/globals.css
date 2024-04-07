@@ -84,3 +84,38 @@
     @apply bg-background text-foreground;
   }
 }
+
+.containerWrap {
+  @apply container mx-auto max-w-4xl;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .containerWrap {
+    @apply container mx-auto max-w-4xl;
+  }
+  .flex.con {
+    flex-direction: column;
+  }
+
+  .flex.justify-between {
+    justify-content: space-between;
+  }
+
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
+
+  .flex-none {
+    flex: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}

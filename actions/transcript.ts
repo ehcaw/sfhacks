@@ -1,8 +1,7 @@
-
 /**
- * 
- * @param prevState 
- * @param formData 
+ *
+ * @param prevState
+ * @param formData
  * @returns chat response
  */
 async function transcript(prevState: any, formData: FormData) {
@@ -17,7 +16,7 @@ async function transcript(prevState: any, formData: FormData) {
     };
   }
 
-  const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
   const file = formData.get("audio") as File;
 
   if (file.size === 0) {
@@ -33,18 +32,18 @@ async function transcript(prevState: any, formData: FormData) {
   console.log("== Transcribe Audio Sample ==");
 
   const response = await fetch(`${apiUrl}/whisper`, {
-    method: 'POST',
+    method: "POST",
     body: formData,
   });
 
   const transcription = await response.json();
   console.log(`Transcription: ${transcription.text}`);
 
-  const openAiResponse = await fetch('https://api.openai.com/v1/completions', {
-    method: 'POST',
+  const openAiResponse = await fetch("https://api.openai.com/v1/completions", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
     },
     body: JSON.stringify({
       model: "text-davinci-003", // Adjust model as necessary
@@ -68,7 +67,6 @@ async function transcript(prevState: any, formData: FormData) {
 }
 
 export default transcript;
-
 
 /**
  * 

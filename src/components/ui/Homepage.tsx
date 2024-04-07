@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { NavbarDemo } from "../Navbar";
-import { Chatroom } from "../ModulePopup";
+import { ChatCard } from "../ModulePopup";
 
 export function Homepage() {
   const [popup, setPopup] = useState<boolean>(false);
@@ -37,7 +37,7 @@ export function Homepage() {
               description={item.description}
               className={cn("[&>p:text-lg]", item.className)}
             />
-            {popup && <Chatroom></Chatroom>}
+            {popup && <ChatCard />}
           </div>
         ))}
       </BentoGrid>

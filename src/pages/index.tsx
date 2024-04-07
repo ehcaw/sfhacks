@@ -4,6 +4,11 @@ import React from "react";
 import { Homepage } from "@/components/ui/Homepage";
 import { Menu } from "@/components/Navbar";
 import Recorder from "@/components/page/Recorder";
+import Home from "@/components/page/Pipeline";
+import { ChatCard } from "@/components/ModulePopup";
+import { Chatroom } from "@/components/ModulePopup";
+import { Message as MessageType } from "@/ion/types";
+
 const LandingPage: NextPage = () => {
   return (
     <div className="flex flex-col h-full overflow-auto">
@@ -11,7 +16,7 @@ const LandingPage: NextPage = () => {
         <title>elitecode</title>
       </Head>
       <main className="flex-1 bg-white p-8">
-        <Homepage />
+        <ChatCard />
       </main>
     </div>
   );
