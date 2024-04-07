@@ -1,4 +1,4 @@
-async function textToSpeech(text: string, voiceId: string = 'TWUKKXAylkYxxlPe4gx0') {
+async function textToSpeech(text: string, voiceId: string = 'eYO9Ven76ACQ8Me4zQK4') {
   const options = {
     method: 'POST',
     headers: {
