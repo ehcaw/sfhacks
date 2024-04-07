@@ -43,7 +43,9 @@ export function Homepage() {
               description={item.description}
               className={cn("[&>p:text-lg]", item.className)}
             />
-            {activeIndex === i && popup && <ChatCard onClose={handleClose} />}
+            {activeIndex === i && popup && (
+              <ChatCard onClose={handleClose} topic={item.title} />
+            )}
           </div>
         ))}
       </BentoGrid>
