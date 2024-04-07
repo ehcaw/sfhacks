@@ -16,7 +16,7 @@ export const SendMessage = ({ onSendMessage }: SendMessageProps) => {
   };
 
   return (
-    <div className=" fixed py-10 shadow-lg">
+    <div className=" fixed bottom-0  shadow-lg">
       <form onSubmit={handleSendMessage} className="containerWrap px-2 flex">
         <input
           value={value}

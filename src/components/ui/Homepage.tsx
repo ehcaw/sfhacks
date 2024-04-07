@@ -10,12 +10,13 @@ export function Homepage() {
   const [popup, setPopup] = useState<boolean>(false);
   const [topic, setTopic] = useState<string>("");
   const [numElements, setNumElements] = useState<number>(1);
-  const [active, setActive] = useState<string | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const handleClick = (title: string) => {
+  const handleClick = (title: string, index: number) => {
     setPopup(!popup);
     setTopic(title);
     setNumElements(numElements);
+    setActiveIndex(index);
   };
 
   return (
@@ -26,7 +27,7 @@ export function Homepage() {
       <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
         {items.map((item, i) => (
           <div
-            onClick={() => handleClick(items[i].title)}
+            onClick={() => handleClick(items[i].title, i)}
             key={i}
             className={cn("[&>p:text-lg]", item.className)}
           >
@@ -37,7 +38,7 @@ export function Homepage() {
               description={item.description}
               className={cn("[&>p:text-lg]", item.className)}
             />
-            {popup && <ChatCard />}
+            {activeIndex === i && popup && <ChatCard />}
           </div>
         ))}
       </BentoGrid>

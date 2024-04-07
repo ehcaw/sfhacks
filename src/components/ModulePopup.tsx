@@ -1,65 +1,45 @@
-import React, { useState } from "react";
-import { Chatbox } from "@/ion/Chatbox";
-import { SendMessage } from "@/ion/Sendmessage";
+import { useEffect, useState } from "react";
 import { Message as MessageType } from "@/ion/types";
-import { VerticalBar } from "@/ion/verticalsidebar";
+import { SendMessage } from "@/ion/Sendmessage";
+import { Chatbox } from "@/ion/Chatbox";
+
+export const ChatCard = () => {
+  useEffect(() => {
+    // Disable scrolling on the body when the component mounts
+    document.body.style.overflow = "hidden";
+
+    // Re-enable scrolling when the component unmounts
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
+
+  return (
+    <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+      <Chatroom />
+    </div>
+  );
+};
 
 export const Chatroom = () => {
   const [messages, setMessages] = useState<MessageType[]>([]);
 
   const handleNewMessage = (newMessageText: string) => {
-    setMessages((currentMessages) => {
-      const updatedMessages = [
-        ...currentMessages,
-        { text: newMessageText, senderId: "me" },
-      ];
-      return updatedMessages;
-    });
+    setMessages((currentMessages) => [
+      ...currentMessages,
+      { text: newMessageText, senderId: "me" },
+    ]);
   };
 
   return (
-    <div>
-      <div className="flex-none overflow-y-auto flex">
-        <div
-          className="containerWrap flex-1 scrollbar-hide overflow-y-auto"
-          style={{ maxHeight: "calc(100vh - 5px)" }}
-        >
-          <Chatbox messages={messages} />
-        </div>
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 bg-white dark:bg-black rounded-lg shadow-lg p-4 flex flex-col">
+      <div
+        className="flex-1 overflow-y-auto"
+        style={{ maxHeight: "calc(100vh - 200px)" }}
+      >
+        <Chatbox messages={messages} />
       </div>
-      <div className="flex-1">
-        <div className="pl-20">
-          <SendMessage onSendMessage={handleNewMessage} />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export const ChatCard = () => {
-  return (
-    <div className="card w-96 bg-base-100 shadow-xl">
-      <div className="card-body">
-        <div className="card-actions justify-end">
-          <button className="btn btn-square btn-sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-        <Chatroom />
-      </div>
+      <SendMessage onSendMessage={handleNewMessage} />
     </div>
   );
 };

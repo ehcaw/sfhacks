@@ -8,15 +8,14 @@ import { ChatCard } from "@/components/ModulePopup";
 import { Chatroom } from "@/components/ModulePopup";
 import { Message as MessageType } from "@/ion/types";
 
-
 const LandingPage: NextPage = () => {
   return (
-    <div className="flex flex-col h-full overflow-auto">
+    <div>
       <Head>
         <title>elitecode</title>
       </Head>
       <main className="flex-1 bg-white p-8">
-        <ChatCard />
+        <Homepage />
       </main>
     </div>
   );

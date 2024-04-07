@@ -24,10 +24,9 @@ function Navbar({ className }: { className?: string }) {
       )}
     >
       <Menu setActive={setActive}>
-        <TextGenerateEffect
-          words="elitecode"
-          className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white text-3xl"
-        ></TextGenerateEffect>
+        <div className="flex flex-col space-y-4 text-3xl font-bold">
+          elitecode
+        </div>
         <MenuItem setActive={setActive} active={active} item="about">
           <div className="flex flex-col space-y-4 text-lg font-medium">
             <p>
