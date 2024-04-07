@@ -1,5 +1,4 @@
-/**
- * 
+
 
 import { Message } from "./Pipeline";
 import SubmitButton from "./SubmitButton";
@@ -55,4 +54,3 @@ function Messages({ messages }: Props) {
 
 export default Messages;
 
-*/

@@ -1,7 +1,3 @@
-/**
- * 
- * 
-
 "use client";
 
 import React from "react";
@@ -21,4 +17,3 @@ function SubmitButton() {
 }
 
 export default SubmitButton;
-*/
