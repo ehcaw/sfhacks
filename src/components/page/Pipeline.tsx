@@ -4,7 +4,6 @@ import transcript from "../../../actions/transcript";
 import { useFormState } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import Recorder from "./Recorder";
-import VoiceSynthesizer from "./VoiceSynthesizer";
 import Messages from "./Messages";
 import { SettingsIcon } from "lucide-react";
 import Image from "next/image";
@@ -95,11 +94,28 @@ export default function Home() {
 
         <div className="fixed bottom-0 w-full overflow-hidden bg-black rounded-t-3xl">
           <Recorder uploadAudio={uploadAudio} />
-          <div className="">
-            <VoiceSynthesizer state={state} displaySettings={displaySettings} />
-          </div>
         </div>
       </form>
     </main>
   );
 }
+
+/*
+<form action={formAction} className="flex flex-col bg-black">
+        <div className="flex-1 bg-gradient-to-b from-purple-500 to-black">
+          <Messages messages={messages} />
+        </div>
+
+        <input type="file" name="audio" ref={fileRef} hidden />
+        <button type="submit" hidden ref={submitButtonRef} />
+
+        <div className="fixed bottom-0 w-full overflow-hidden bg-black rounded-t-3xl">
+          <Recorder uploadAudio={uploadAudio} />
+          <div className="">  
+          I REMOVED THIS 
+
+           <VoiceSynthesizer state={state} displaySettings={displaySettings} />
+          </div>
+          
+        </div>
+*/

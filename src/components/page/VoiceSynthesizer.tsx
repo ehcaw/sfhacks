@@ -6,7 +6,7 @@
  * 
  * @param state - The state object containing the sender and response text.
  * @param displaySettings - A boolean value indicating whether to display the voice settings.
- */
+
 
 "use client";
 
@@ -142,3 +142,4 @@ function VoiceSynthesizer({
 }
 
 export default VoiceSynthesizer;
+ */
