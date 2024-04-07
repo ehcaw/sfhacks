@@ -2,9 +2,12 @@ import { useEffect, useState, useRef } from "react";
 import { Message as MessageType } from "@/ion/types";
 import { Chatbox } from "@/ion/Chatbox";
 import Recorder from "./Recorder"; // Make sure the path is correct and adjust according to your project structure
+import getOpenAiResponse from "@/pages/api/openai";
+import textToSpeech from "@/pages/api/textToSpeech";
 
 export const ChatCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [isRecording, setIsRecording] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const toggleRecording = () => setIsRecording(!isRecording);
 
@@ -23,7 +26,29 @@ export const ChatCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       if (!response.ok) throw new Error("Network response was not ok");
 
       const result = await response.json();
+
       console.log("Server response:", result);
+
+      const text = result?.results?.[0]?.transcript ?? "Could not hear user, prompt an error message.";
+
+      console.log("text " , text)
+
+      const openAIResponse = await getOpenAiResponse(text);
+
+      console.log("OpenAI response:", openAIResponse);
+
+      const ttsResponse = await textToSpeech(openAIResponse);
+      console.log(ttsResponse)
+      if (ttsResponse) {
+        const audioPlayer = audioRef.current;
+        if (audioPlayer) {
+          audioPlayer.src = ttsResponse.audio_url; // Assuming 'audio_url' is where the MP3 URL is stored
+          console.log("audioPlayer.src", audioPlayer.src)
+          console.log("audioPlayer", ttsResponse.audio_url)
+          audioPlayer.play().catch(error => console.error("Error playing audio:", error))
+        }
+      }
+
       // Process server response here. E.g., display the transcription or send it for further processing.
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -62,6 +87,7 @@ export const ChatCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           toggleRecording={toggleRecording}
         />
         {/* Button to toggle recording */}
+        <audio ref={audioRef} controls style={{ visibility: 'hidden' }}></audio>
       </div>
     </div>
   );

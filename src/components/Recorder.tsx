@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import activeAssistantIcon from "@/img/active.gif";
 import notActiveAssistantIcon from "@/img/notactive.png";
 import React from "react";
+import textToSpeech from "../pages/api/textToSpeech";
 import { start } from "repl";
 
 const mimeType = "audio/webm";
@@ -242,3 +243,7 @@ export const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
   }, [audioStream, isVisualizing]);
   return <canvas ref={canvasRef} className="w-800 h-100" />;
 };
+function base64ToBlob(audioContent: any, arg1: string) {
+  throw new Error("Function not implemented.");
+}
+
