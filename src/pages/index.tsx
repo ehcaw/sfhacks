@@ -3,7 +3,7 @@ import Head from "next/head";
 import React from "react";
 import { Homepage } from "@/components/ui/Homepage";
 import { Menu } from "@/components/Navbar";
-import Home from "@/components/page/Pipeline";
+import Recorder from "@/components/page/Recorder";
 const LandingPage: NextPage = () => {
   return (
     <div className="flex flex-col h-full overflow-auto">
@@ -11,7 +11,7 @@ const LandingPage: NextPage = () => {
         <title>elitecode</title>
       </Head>
       <main className="flex-1 bg-white p-8">
-        <Homepage></Homepage>
+        <Homepage />
       </main>
     </div>
   );
