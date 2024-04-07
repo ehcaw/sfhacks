@@ -8,14 +8,7 @@ interface ChatCardProps {
 }
 
 export const ChatCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  // This function is called when the overlay is clicked
-  const handleOverlayClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    onClose();
-  };
-
-  // This function stops the click from propagating to the overlay
+  // Prevents propagation to the overlay
   const handleCardClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -25,17 +18,21 @@ export const ChatCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   return (
     <div
       className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center"
-      onClick={handleOverlayClick}
+      onClick={() => onClose()} // Closes when overlay is clicked
     >
       <div
         className="relative w-3/4 h-3/4 bg-white dark:bg-black rounded-lg shadow-lg p-4 flex flex-col"
         onClick={handleCardClick}
       >
-        {/* Close button now to the left inside the card */}
-        <div className="absolute top-0 left-0 -ml-8 mt-2">
+        {/* Correctly aligned close button with "×" */}
+        <div className="absolute top-0 left-0 ml-4 mt-4 text-black">
           <button
-            onClick={onClose}
-            className="text-2xl text-white bg-transparent hover:bg-gray-200 hover:text-black rounded-full p-1"
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent the click from propagating to the overlay
+              onClose();
+            }}
+            className="text-4xl text-black bg-black hover:bg-gray-700 hover:text-black rounded-full p-2"
+            style={{ outline: "none" }} // Removes focus outline
           >
             &times;
           </button>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import active from "@/img/transparentsiri.gif";
 import notActive from "@/img/transparent.png";
+import { AudioRecordingFeature } from "@/components/page/Recorder";
 
 export const SendMessage: React.FC<{
   onSendMessage: (message: string) => void;
@@ -23,13 +24,7 @@ export const SendMessage: React.FC<{
 
   return (
     <div className="flex justify-center items-center mt-2">
-      <input
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        className="input flex-1 rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white"
-        placeholder="Your message..."
-      />
+      <AudioRecordingFeature />
       <button
         onClick={handleSend}
         disabled={message.trim() === ""}
@@ -47,3 +42,13 @@ export const SendMessage: React.FC<{
     </div>
   );
 };
+
+/*
+<input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        className="input flex-1 rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white"
+        placeholder="Your message..."
+      />
+*/

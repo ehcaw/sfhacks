@@ -17,10 +17,11 @@ export function Homepage() {
     setTopic(title);
     setNumElements(numElements);
     setActiveIndex(index);
+    console.log("click handled!");
   };
-  const [showChatCard, setShowChatCard] = useState<boolean>(false);
   const handleClose = () => {
-    setShowChatCard(false);
+    console.log("close handled!");
+    setPopup(false);
   };
 
   return (
