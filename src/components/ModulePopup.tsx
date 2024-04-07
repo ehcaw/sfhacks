@@ -14,6 +14,26 @@ export const ChatCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   ) => {
     event.stopPropagation();
   };
+  
+  const uploadAudio = async (blob: Blob) => {
+    const formData = new FormData();
+    formData.append('audio', blob, 'audio.webm'); // Assuming 'audio' is the expected field name on your server
+  
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/uploadAudio`, { // Endpoint to handle audio upload
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (!response.ok) throw new Error('Network response was not ok');
+  
+      const result = await response.json();
+      console.log('Server response:', result);
+      // Process server response here. E.g., display the transcription or send it for further processing.
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
 
   return (
     <div

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import active from "@/img/transparentsiri.gif";
 import notActive from "@/img/transparent.png";
-import { AudioRecordingFeature } from "@/components/page/Recorder";
+import { AudioRecordingFeature } from "@/components/Recorder";
 
 export const SendMessage: React.FC<{
   onSendMessage: (message: string) => void;
