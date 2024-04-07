@@ -1,36 +1,49 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import active from "@/img/active.gif";
+import notActive from "@/img/notactive.png";
 
-type SendMessageProps = {
+export const SendMessage: React.FC<{
   onSendMessage: (message: string) => void;
-};
+}> = ({ onSendMessage }) => {
+  const [message, setMessage] = useState<string>("");
 
-export const SendMessage = ({ onSendMessage }: SendMessageProps) => {
-  const [value, setValue] = useState("");
-
-  const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (value.trim()) {
-      onSendMessage(value);
-      setValue("");
+  const handleSend = () => {
+    if (message.trim() !== "") {
+      onSendMessage(message);
+      setMessage("");
     }
   };
 
+  // Inline styles for the image size adjustment
+  const imageStyle = {
+    width: "auto", // Adjust width automatically based on the height
+    height: "100px", // Example size, adjust as needed
+    backgroundColor: "transparent", // Attempt to set background to transparent
+  };
+
   return (
-    <div className=" fixed bottom-0  shadow-lg">
-      <form onSubmit={handleSendMessage} className="containerWrap px-2 flex">
-        <input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          className="input w-full focus:outline-none bg-gray-100 rounded-r-none"
-          type="text"
+    <div className="flex justify-center items-center mt-2">
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        className="input flex-1 rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white"
+        placeholder="Your message..."
+      />
+      <button
+        onClick={handleSend}
+        disabled={message.trim() === ""}
+        className={`${
+          message.trim() === "" ? "opacity-50 cursor-not-allowed" : ""
+        }`}
+        style={{ border: "none", background: "none" }} // Removes any default styling from the button
+      >
+        <img
+          src={message.trim() ? active.src : notActive.src}
+          alt="Send"
+          style={imageStyle}
         />
-        <button
-          type="submit"
-          className="w-auto bg-gray-500 text-white rounded-r-lg px-5 text-sm"
-        >
-          Send
-        </button>
-      </form>
+      </button>
     </div>
   );
 };

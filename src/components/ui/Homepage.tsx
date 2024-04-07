@@ -18,6 +18,10 @@ export function Homepage() {
     setNumElements(numElements);
     setActiveIndex(index);
   };
+  const [showChatCard, setShowChatCard] = useState<boolean>(false);
+  const handleClose = () => {
+    setShowChatCard(false);
+  };
 
   return (
     <div>
@@ -38,7 +42,7 @@ export function Homepage() {
               description={item.description}
               className={cn("[&>p:text-lg]", item.className)}
             />
-            {activeIndex === i && popup && <ChatCard />}
+            {activeIndex === i && popup && <ChatCard onClose={handleClose} />}
           </div>
         ))}
       </BentoGrid>
