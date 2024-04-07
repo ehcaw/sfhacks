@@ -18,22 +18,24 @@ function Navbar({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "fixed top-10 inset-x-0 max-w-2xl mx-auto z-50 text-lg",
+        "flex top-10 inset-x-0 max-w-2xl mx-auto z-50 text-lg",
         className
       )}
     >
       <Menu setActive={setActive}>
-        <MenuItem setActive={setActive} active={active} item="elitecode">
-          <div className="flex flex-col space-y-4 text-lg">
+        <div className="flex flex-col space-y-4 text-3xl font-bold">
+          elitecode
+        </div>
+        <MenuItem setActive={setActive} active={active} item="about">
+          <div className="flex flex-col space-y-4 text-lg font-medium">
             <p>
               elitecode is a new way of practicing your data structures and
               algorithms using the feynman technique
             </p>
           </div>
         </MenuItem>
-        <span className="w-5" />
         <MenuItem setActive={setActive} active={active} item="links">
-          <div className="  text-lg grid grid-cols-3 gap-10 p-4">
+          <div className="  text-lg grid grid-cols-3 gap-10 p-4 font-medium">
             <ProductItem
               title="github"
               href="https://github.com/ehcaw/sfhacks"
@@ -83,7 +85,7 @@ export const MenuItem = ({
     <div onMouseEnter={() => setActive(item)} className="relative ">
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
+        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white text-3xl"
       >
         {item}
       </motion.p>
@@ -125,7 +127,7 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className="relative rounded-full boder border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 "
+      className="relative rounded-full boder border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-10 px-40 py-6 "
     >
       {children}
     </nav>

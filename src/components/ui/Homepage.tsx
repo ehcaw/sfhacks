@@ -173,7 +173,7 @@ const SkeletonThree: React.FC<SkeletonThreeProps> = ({ imgSrc }) => {
           alt="trees"
           height="600"
           width="600"
-          className="h-20 w-20"
+          className="h-30 w-30"
           unoptimized
         ></Image>
       </motion.div>
