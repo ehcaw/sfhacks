@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import active from "@/img/active.gif";
-import notActive from "@/img/notactive.png";
+import active from "@/img/transparentsiri.gif";
+import notActive from "@/img/transparent.png";
 
 export const SendMessage: React.FC<{
   onSendMessage: (message: string) => void;
