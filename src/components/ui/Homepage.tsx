@@ -1,42 +1,52 @@
 "use client";
 import { cn } from "@/utils/cn";
 import React, { useState } from "react";
-import {
-  IconBoxAlignRightFilled,
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
-} from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import ModulePopup from "../ModulePopup";
+import Link from "next/link";
 
-export function BentoGridThirdDemo() {
+export function Homepage() {
   const [popup, setPopup] = useState<boolean>(false);
+  const [topic, setTopic] = useState<string>("");
+  const [numElements, setNumElements] = useState<number>(1);
+  const [active, setActive] = useState<string | null>(null);
+
   const handleClick = (title: string) => {
     setPopup(!popup);
+    setTopic(title);
+    setNumElements(numElements);
   };
   return (
-    <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
-      {items.map((item, i) => (
-        <div
-          onClick={() => handleClick(item.title)}
-          key={i}
-          className={cn("[&>p:text-lg]", item.className)}
-        >
-          <BentoGridItem
+    <div>
+      <Menu setActive={setActive}>
+        <MenuItem setActive={setActive} active={active} item="elitecode" />
+        <MenuItem setActive={setActive} active={active} item="github" />
+      </Menu>
+      <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
+        {items.map((item, i) => (
+          <div
+            onClick={() => handleClick(items[i].title)}
             key={i}
-            title={item.title}
-            description={item.description}
-            header={item.header}
             className={cn("[&>p:text-lg]", item.className)}
-            icon={item.icon}
-          />
-          {popup && <ModulePopup title={item.title}></ModulePopup>}
-        </div>
-      ))}
-    </BentoGrid>
+          >
+            <BentoGridItem
+              key={i}
+              title={item.title}
+              header={item.header}
+              description={item.description}
+              className={cn("[&>p:text-lg]", item.className)}
+            />
+            {popup && (
+              <ModulePopup
+                title={topic}
+                numElements={numElements}
+              ></ModulePopup>
+            )}
+          </div>
+        ))}
+      </BentoGrid>
+    </div>
   );
 }
 const Skeleton = () => (
@@ -121,24 +131,28 @@ const SkeletonTwo = () => {
   return (
     <motion.div
       initial="initial"
-      animate="animate"
-      whileHover="hover"
+      whileHover="animate"
       className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
     >
-      {arr.map((_, i) => (
-        <motion.div
-          key={"skeleton-two" + i}
-          variants={variants}
-          style={{
-            maxWidth: Math.random() * (100 - 40) + 40 + "%",
-          }}
-          className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-neutral-100 dark:bg-black w-full h-4"
-        ></motion.div>
-      ))}
+      <Image
+        src="/linkedlist.gif"
+        alt="graphs"
+        height="800"
+        width="800"
+        className=" h-100 w-100"
+        unoptimized
+      ></Image>
+      <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
+        singly linked, doubly linked
+      </p>
     </motion.div>
   );
 };
-const SkeletonThree = () => {
+
+type SkeletonThreeProps = {
+  imgSrc: string;
+};
+const SkeletonThree: React.FC<SkeletonThreeProps> = ({ imgSrc }) => {
   const variants = {
     initial: {
       backgroundPosition: "0 50%",
@@ -148,24 +162,23 @@ const SkeletonThree = () => {
     },
   };
   return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      variants={variants}
-      transition={{
-        duration: 5,
-        repeat: Infinity,
-        repeatType: "reverse",
-      }}
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
-      style={{
-        background:
-          "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",
-        backgroundSize: "400% 400%",
-      }}
-    >
+    <div>
+      <motion.div
+        initial="initial"
+        whileHover="animate"
+        className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+      >
+        <Image
+          src={imgSrc}
+          alt="trees"
+          height="600"
+          width="600"
+          className="h-20 w-20"
+          unoptimized
+        ></Image>
+      </motion.div>
       <motion.div className="h-full w-full rounded-lg"></motion.div>
-    </motion.div>
+    </div>
   );
 };
 const SkeletonFour = () => {
@@ -202,10 +215,10 @@ const SkeletonFour = () => {
       >
         <Image
           src="/n2.webp"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="h-10 w-10"
+          alt="n2 graph"
+          height="800"
+          width="800"
+          className="h-30 w-30"
         />
         <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
           bubble sort, insertion sort, selection sort
@@ -216,8 +229,8 @@ const SkeletonFour = () => {
       </motion.div>
       <motion.div className="h-full relative z-20 w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center">
         <Image
-          src="/n2.webp"
-          alt="avatar"
+          src="/nlogn.png"
+          alt="nlogn graph"
           height="800"
           width="800"
           className=" h-30 w-30"
@@ -234,11 +247,11 @@ const SkeletonFour = () => {
         className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
       >
         <Image
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
+          src="/linear.webp"
+          alt="linear graph"
+          height="400"
+          width="400"
+          className="h-20 w-20"
         />
         <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
           bucket sort, counting sort
@@ -275,6 +288,13 @@ const SkeletonFive = () => {
       },
     },
   };
+  const animate = {
+    x: -10,
+    rotate: -5,
+    transition: {
+      duration: 0.2,
+    },
+  };
 
   return (
     <motion.div
@@ -283,20 +303,17 @@ const SkeletonFive = () => {
       className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
     >
       <Image
-        src="/graphs.avif"
+        src="/graph.gif"
         alt="graphs"
-        height="800"
-        width="800"
-        className=" h-100 w-100"
+        height={300}
+        width={300}
+        unoptimized
       ></Image>
       <motion.div
-        variants={variants}
-        className="border border-blue-500 bg-blue-100 flex flex-row rounded-2xl border border-neutral-100 dark:border-white/[0.2] p-2 items-center justify-center bg-white dark:bg-black"
-      >
-        <p className="text-xs text-neutral-500 text-center text-blue-600">
-          undirected, directed, connected
-        </p>
-      </motion.div>
+        initial="initial"
+        whileHover="animate"
+        className="flex flex-1 w-full dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+      ></motion.div>
     </motion.div>
   );
 };
@@ -333,11 +350,11 @@ const SkeletonSix = () => {
         className="h-full relative z-20 w-1/2 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
       >
         <Image
-          src="/n2.webp"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="h-10 w-10"
+          src="/linearsearch.gif"
+          alt="linear search"
+          height="1200"
+          width="800"
+          unoptimized
         />
         <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
           linear search
@@ -351,11 +368,10 @@ const SkeletonSix = () => {
         className="h-full relative z-20 w-1/2 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
       >
         <Image
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
+          src="/binarysearch.png"
+          alt="binary search"
+          height="1200"
+          width="800"
         />
         <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
           binary search
@@ -363,6 +379,62 @@ const SkeletonSix = () => {
         <p className="border border-green-500 bg-green-100 dark:bg-green-900/20 text-green-600 text-xs rounded-full px-2 py-0.5 mt-4">
           logn time
         </p>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+const SkeletonSeven = () => {
+  const variants = {
+    initial: {
+      x: 20,
+      rotate: -5,
+    },
+    hover: {
+      x: 0,
+      rotate: 0,
+    },
+  };
+  const variantsSecond = {
+    initial: {
+      x: 20,
+      rotate: 5,
+    },
+    hover: {
+      x: 0,
+      rotate: 0,
+    },
+  };
+  return (
+    <motion.div
+      initial="initial"
+      animate="animate"
+      whileHover="hover"
+      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-row space-x-2"
+    >
+      <motion.div
+        variants={variants}
+        className="h-full relative z-20 w-1/2 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+      >
+        <Image
+          src="/queue.gif"
+          alt="queue"
+          height="1200"
+          width="800"
+          unoptimized
+        />
+      </motion.div>
+      <motion.div
+        variants={variantsSecond}
+        className="h-full relative z-20 w-1/2 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+      >
+        <Image
+          src="/stack.gif"
+          alt="stack"
+          height="1200"
+          width="800"
+          unoptimized
+        />
       </motion.div>
     </motion.div>
   );
@@ -375,9 +447,9 @@ const items = [
         contiguous memory storage for elements, usually of the same type
       </span>
     ),
-    header: <SkeletonOne />,
+    header: <SkeletonThree imgSrc={"/array.gif"} />,
     className: "md:col-span-1",
-    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+    numElements: 1,
   },
   {
     title: "searching algorithms",
@@ -386,7 +458,7 @@ const items = [
     ),
     header: <SkeletonSix />,
     className: "md:col-span-2",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    numElements: 2,
   },
   {
     title: "sorting algorithms",
@@ -397,7 +469,7 @@ const items = [
     ),
     header: <SkeletonFour />,
     className: "md:col-span-2",
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+    numElements: 3,
   },
   {
     title: "linked list",
@@ -408,18 +480,7 @@ const items = [
     ),
     header: <SkeletonTwo />,
     className: "md:col-span-1",
-    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: "tree",
-    description: (
-      <span className="text-sm">
-        hierarchical data structure with a root and branches
-      </span>
-    ),
-    header: <SkeletonThree />,
-    className: "md:col-span-1",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    numElements: 1,
   },
   {
     title: "graph",
@@ -428,34 +489,34 @@ const items = [
     ),
     header: <SkeletonFive />,
     className: "md:col-span-1",
-    icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
+    numElements: 1,
   },
   {
-    title: "stack",
-    description: (
-      <span className="text-sm">last in, first out data structure</span>
-    ),
-    header: <SkeletonThree />,
-    className: "md:col-span-1",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    title: "fifo / lifo data structures",
+    description: <span className="text-sm">queue(fifo) and stack(lifo)</span>,
+    header: <SkeletonSeven></SkeletonSeven>,
+    className: "md: col-span-2",
+    numElements: 2,
   },
   {
-    title: "queue",
+    title: "tree",
     description: (
-      <span className="text-sm">first in, first out data structure</span>
+      <span className="text-sm">
+        hierarchical data structure with a root and branches
+      </span>
     ),
-    header: <SkeletonThree />,
+    header: <SkeletonThree imgSrc={"/trees.gif"} />,
     className: "md:col-span-1",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    numElements: 1,
   },
   {
     title: "hash table",
     description: (
       <span className="text-sm">data structure that maps keys to values</span>
     ),
-    header: <SkeletonThree />,
+    header: <SkeletonThree imgSrc={"/hashtable.gif"} />,
     className: "md:col-span-1",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    numElements: 1,
   },
   {
     title: "heap",
@@ -464,9 +525,9 @@ const items = [
         binary tree with a specific ordering property
       </span>
     ),
-    header: <SkeletonThree />,
+    header: <SkeletonThree imgSrc={"/heap.gif"} />,
     className: "md:col-span-1",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    numElements: 1,
   },
 ];
 
@@ -522,6 +583,121 @@ export const BentoGridItem = ({
     </div>
   );
 };
+const transition = {
+  type: "spring",
+  mass: 0.5,
+  damping: 11.5,
+  stiffness: 100,
+  restDelta: 0.001,
+  restSpeed: 0.001,
+};
+
+export const MenuItem = ({
+  setActive,
+  active,
+  item,
+  children,
+}: {
+  setActive: (item: string) => void;
+  active: string | null;
+  item: string;
+  children?: React.ReactNode;
+}) => {
+  return (
+    <div onMouseEnter={() => setActive(item)} className="relative ">
+      <motion.p
+        transition={{ duration: 0.3 }}
+        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
+      >
+        {item}
+      </motion.p>
+      {active !== null && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={transition}
+        >
+          {active === item && (
+            <div className="absolute top-[calc(100%_+_1.7rem)] left-1/2 transform -translate-x-1/2">
+              <motion.div
+                transition={transition}
+                layoutId="active" // layoutId ensures smooth animation
+                className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+              >
+                <motion.div
+                  layout // layout ensures smooth animation
+                  className="w-max h-full p-4"
+                >
+                  {children}
+                </motion.div>
+              </motion.div>
+            </div>
+          )}
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
+export const Menu = ({
+  setActive,
+  children,
+}: {
+  setActive: (item: string | null) => void;
+  children: React.ReactNode;
+}) => {
+  return (
+    <nav
+      onMouseLeave={() => setActive(null)} // resets the state
+      className="relative rounded-full boder border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 "
+    >
+      {children}
+    </nav>
+  );
+};
+
+export const ProductItem = ({
+  title,
+  description,
+  href,
+  src,
+}: {
+  title: string;
+  description: string;
+  href: string;
+  src: string;
+}) => {
+  return (
+    <Link href={href} className="flex space-x-2">
+      <Image
+        src={src}
+        width={140}
+        height={70}
+        alt={title}
+        className="flex-shrink-0 rounded-md shadow-2xl"
+      />
+      <div>
+        <h4 className="text-xl font-bold mb-1 text-black dark:text-white">
+          {title}
+        </h4>
+        <p className="text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300">
+          {description}
+        </p>
+      </div>
+    </Link>
+  );
+};
+
+export const HoveredLink = ({ children, ...rest }: any) => {
+  return (
+    <Link
+      {...rest}
+      className="text-neutral-700 dark:text-neutral-200 hover:text-black "
+    >
+      {children}
+    </Link>
+  );
+};
 
 /* all boiler plate code given
 <motion.div
@@ -548,4 +724,42 @@ export const BentoGridItem = ({
         <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
       </motion.div>
 
+
+      moving bar graphs 
+      <motion.div
+      initial="initial"
+      animate="animate"
+      variants={variants}
+      transition={{
+        duration: 5,
+        repeat: Infinity,
+        repeatType: "reverse",
+      }}
+      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
+      style={{
+        background:
+          "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",
+        backgroundSize: "400% 400%",
+      }}
+    >
+      <motion.div className="h-full w-full rounded-lg"></motion.div>
+    </motion.div>
+
+    pink block:
+    <motion.div
+      initial="initial"
+      animate="animate"
+      variants={variants}
+      transition={{
+        duration: 5,
+        repeat: Infinity,
+        repeatType: "reverse",
+      }}
+      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
+      style={{
+        background:
+          "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",
+        backgroundSize: "400% 400%",
+      }}
+    >
 */
