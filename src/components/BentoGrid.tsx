@@ -1,11 +1,7 @@
 import { cn } from "../utils/cn";
 import React, { ReactNode } from "react";
 
-import {
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-} from "@tabler/icons-react";
+import { IconSignature } from "@tabler/icons-react";
 
 export const BentoGrid = ({
   className,

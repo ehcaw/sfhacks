@@ -29,23 +29,27 @@ export const ChatCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
       console.log("Server response:", result);
 
-      const text = result?.results?.[0]?.transcript ?? "Could not hear user, prompt an error message.";
+      const text =
+        result?.results?.[0]?.transcript ??
+        "Could not hear user, prompt an error message.";
 
-      console.log("text " , text)
+      console.log("text ", text);
 
       const openAIResponse = await getOpenAiResponse(text);
 
       console.log("OpenAI response:", openAIResponse);
 
       const ttsResponse = await textToSpeech(openAIResponse);
-      console.log(ttsResponse)
+      console.log(ttsResponse);
       if (ttsResponse) {
         const audioPlayer = audioRef.current;
         if (audioPlayer) {
           audioPlayer.src = ttsResponse.audio_url; // Assuming 'audio_url' is where the MP3 URL is stored
-          console.log("audioPlayer.src", audioPlayer.src)
-          console.log("audioPlayer", ttsResponse.audio_url)
-          audioPlayer.play().catch(error => console.error("Error playing audio:", error))
+          console.log("audioPlayer.src", audioPlayer.src);
+          console.log("audioPlayer", ttsResponse.audio_url);
+          audioPlayer
+            .play()
+            .catch((error) => console.error("Error playing audio:", error));
         }
       }
 
@@ -68,7 +72,7 @@ export const ChatCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       onClick={onClose} // Closes when overlay is clicked
     >
       <div
-        className="relative w-3/4 h-3/4 bg-white dark:bg-black rounded-lg shadow-lg p-4 flex flex-col"
+        className="relative w-1/2 h-1/2 bg-white dark:bg-black rounded-lg shadow-lg p-4 flex flex-col"
         onClick={handleCardClick}
       >
         <button
@@ -87,7 +91,7 @@ export const ChatCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           toggleRecording={toggleRecording}
         />
         {/* Button to toggle recording */}
-        <audio ref={audioRef} controls style={{ visibility: 'hidden' }}></audio>
+        <audio ref={audioRef} controls style={{ visibility: "hidden" }}></audio>
       </div>
     </div>
   );

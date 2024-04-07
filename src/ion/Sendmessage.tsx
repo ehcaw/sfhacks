@@ -24,7 +24,6 @@ export const SendMessage: React.FC<{
 
   return (
     <div className="flex justify-center items-center mt-2">
-      <AudioRecordingFeature />
       <button
         onClick={handleSend}
         disabled={message.trim() === ""}

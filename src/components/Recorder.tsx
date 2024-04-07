@@ -3,9 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import activeAssistantIcon from "@/img/active.gif";
 import notActiveAssistantIcon from "@/img/notactive.png";
 import React from "react";
-import textToSpeech from "../pages/api/textToSpeech";
-import { start } from "repl";
-
 const mimeType = "audio/webm";
 
 interface RecorderProps {
@@ -246,4 +243,3 @@ export const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
 function base64ToBlob(audioContent: any, arg1: string) {
   throw new Error("Function not implemented.");
 }
-
