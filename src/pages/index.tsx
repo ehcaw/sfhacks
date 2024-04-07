@@ -5,7 +5,6 @@ import { Homepage } from "@/components/ui/Homepage";
 import { Menu } from "@/components/Navbar";
 import Recorder from "@/components/Recorder";
 import { ChatCard } from "@/components/ModulePopup";
-import { Chatroom } from "@/components/ModulePopup";
 import { Message as MessageType } from "@/ion/types";
 
 const LandingPage: NextPage = () => {
