@@ -1,8 +1,63 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+
+export function NavbarDemo() {
+  return (
+    <div className="relative w-full flex items-center justify-center">
+      <Navbar className="top-2" />
+    </div>
+  );
+}
+
+function Navbar({ className }: { className?: string }) {
+  const [active, setActive] = useState<string | null>(null);
+  return (
+    <div
+      className={cn(
+        "fixed top-10 inset-x-0 max-w-2xl mx-auto z-50 text-lg",
+        className
+      )}
+    >
+      <Menu setActive={setActive}>
+        <MenuItem setActive={setActive} active={active} item="elitecode">
+          <div className="flex flex-col space-y-4 text-lg">
+            <p>
+              elitecode is a new way of practicing your data structures and
+              algorithms using the feynman technique
+            </p>
+          </div>
+        </MenuItem>
+        <span className="w-5" />
+        <MenuItem setActive={setActive} active={active} item="links">
+          <div className="  text-lg grid grid-cols-3 gap-10 p-4">
+            <ProductItem
+              title="github"
+              href="https://github.com/ehcaw/sfhacks"
+              src="/github.png"
+              description="check out the repo!"
+            />
+            <ProductItem
+              title="ryan's linkedin"
+              href="https://linkedin.com/in/ryannguyenc"
+              src="/linkedin.webp"
+              description="connect with us!"
+            />
+            <ProductItem
+              title="daniel's linkedin"
+              href="https://linkedin.com/in/danielung22"
+              src="/linkedin.webp"
+              description="connect with us!"
+            />
+          </div>
+        </MenuItem>
+      </Menu>
+    </div>
+  );
+}
 
 const transition = {
   type: "spring",
@@ -92,8 +147,8 @@ export const ProductItem = ({
     <Link href={href} className="flex space-x-2">
       <Image
         src={src}
-        width={140}
-        height={70}
+        width={50}
+        height={50}
         alt={title}
         className="flex-shrink-0 rounded-md shadow-2xl"
       />

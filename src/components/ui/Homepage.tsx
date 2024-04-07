@@ -1,10 +1,10 @@
-"use client";
 import { cn } from "@/utils/cn";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import ModulePopup from "../ModulePopup";
 import Link from "next/link";
+import { NavbarDemo } from "../Navbar";
 
 export function Homepage() {
   const [popup, setPopup] = useState<boolean>(false);
@@ -17,12 +17,12 @@ export function Homepage() {
     setTopic(title);
     setNumElements(numElements);
   };
+
   return (
     <div>
-      <Menu setActive={setActive}>
-        <MenuItem setActive={setActive} active={active} item="elitecode" />
-        <MenuItem setActive={setActive} active={active} item="github" />
-      </Menu>
+      <div className="pt-2 pb-10">
+        <NavbarDemo></NavbarDemo>
+      </div>
       <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
         {items.map((item, i) => (
           <div
@@ -604,7 +604,7 @@ export const MenuItem = ({
   children?: React.ReactNode;
 }) => {
   return (
-    <div onMouseEnter={() => setActive(item)} className="relative ">
+    <div onMouseEnter={() => setActive(item)} className="relative">
       <motion.p
         transition={{ duration: 0.3 }}
         className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
