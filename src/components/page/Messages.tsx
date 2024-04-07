@@ -1,3 +1,5 @@
+/**
+ * 
 
 import { Message } from "./Pipeline";
 import SubmitButton from "./SubmitButton";
@@ -30,14 +32,14 @@ function Messages({ messages }: Props) {
         <div className="p-5 space-y-5">
           {messages.map((message) => (
             <div key={message.id} className="space-y-5">
-              {/* reciever */}
+
               <div className="pr-48">
                 <p className="message bg-gray-800 rounded-bl-none">
                   {message.response}
                 </p>
               </div>
 
-              {/* sender */}
+
               <div className="pl-48">
                 <p className="message text-left ml-auto rounded-br-none">
                   {message.sender}
@@ -52,3 +54,5 @@ function Messages({ messages }: Props) {
 }
 
 export default Messages;
+
+*/
