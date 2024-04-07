@@ -4,7 +4,7 @@ async function textToSpeech(text: string, voiceId: string = 'TWUKKXAylkYxxlPe4gx
     const options = {
       method: 'POST',
       headers: {
-        'xi-api-key': process.env.REACT_APP_ELEVEN_API_KEY || '',
+        'xi-api-key': process.env.NEXT_PUBLIC_ELEVEN_API_KEY|| '',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({

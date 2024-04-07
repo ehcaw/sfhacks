@@ -2,7 +2,7 @@ async function transcript(prevState: any, formData: FormData) {
   "use server";
   const id = Math.random().toString(36);
 
-  if (process.env.REACT_APP_API_URL === undefined) {
+  if (process.env.NEXT_PUBLIC_API_URL === undefined) {
     console.error("GCP credentials not set");
     return {
       sender: "",

@@ -11,9 +11,8 @@ export const ChatCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const uploadAudio = async (blob: Blob) => {
     const formData = new FormData();
     formData.append('audio', blob, 'audio.webm'); // Assuming 'audio' is the expected field name on your server
-  
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/uploadAudio`, { // Endpoint to handle audio upload
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/whisper`, {
         method: 'POST',
         body: formData,
       });
