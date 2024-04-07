@@ -7,7 +7,7 @@ const openai = new OpenAI({
 async function getOpenAiResponse(prompt: string): Promise<string> {
     let openAiResponse;
     openAiResponse = await openai.chat.completions.create({
-      messages: [{ role: 'user', content: prompt }],
+      messages: [{ role: 'user', content: "The user is explaining this topic, explain if it is a good explanation or not:" + prompt }],
       model: 'gpt-3.5-turbo',
       max_tokens: 50,
     });
