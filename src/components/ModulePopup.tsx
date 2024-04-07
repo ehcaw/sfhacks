@@ -88,7 +88,7 @@ export const ChatCard: React.FC<{ onClose: () => void; topic: string }> = ({
           &times;
         </button>
         {!isLoading && (
-          <p className="flex justify-center items-center pt-36 text-xl text-medium">
+          <p className="flex justify-center items-center pt-28 text-xl text-medium">
             Explain to me what {topic} is
           </p>
         )}
