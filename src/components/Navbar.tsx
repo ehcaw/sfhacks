@@ -4,7 +4,6 @@ import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { TextGenerateEffect } from "./ui/TextGen";
 
 export function NavbarDemo() {
   return (

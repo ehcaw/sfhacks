@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { Message as MessageType } from "@/ion/types";
 import { Chatbox } from "@/ion/Chatbox";
 import Recorder from "./Recorder"; // Make sure the path is correct and adjust according to your project structure
 import getOpenAiResponse from "@/pages/api/openai";
@@ -72,7 +71,7 @@ export const ChatCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       onClick={onClose} // Closes when overlay is clicked
     >
       <div
-        className="relative w-1/2 h-1/2 bg-white dark:bg-black rounded-lg shadow-lg p-4 flex flex-col"
+        className="relative w-2/4 h-3/4 bg-white dark:bg-black rounded-lg shadow-lg p-4 flex flex-col"
         onClick={handleCardClick}
       >
         <button
